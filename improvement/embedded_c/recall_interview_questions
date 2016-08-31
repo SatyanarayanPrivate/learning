@@ -1,0 +1,25 @@
+>> Embedded C
+- static 
+- volatile
+- structure, enum and union
+- memory architecture
+- 
+
+>> C++
+- class vs object
+- polymorphism
+- inheritance
+- overloading
+- virtual function
+- constructor & destructor
+
+>> linux os
+- IPC
+- synchronizations
+- socket programming
+- shell commands
+- scheduling
+- process vs thread
+- mutex vs semophore
+
+
