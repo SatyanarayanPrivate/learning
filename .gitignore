@@ -1,5 +1,9 @@
 .~lock.short_notes.xlsx#
-./*.ko
-./*.mod.c
-./*.mod.o
-./*.o
+*.ko*
+*.mod.*
+*.mod.o.*
+*.o.*
+*.o
+*tmp_versions/
+*Module.symvers
+*modules.order
