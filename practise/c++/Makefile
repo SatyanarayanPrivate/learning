@@ -1,16 +1,17 @@
 CROSS_COMPILE=
 
 CC=$(CROSS_COMPILE)g++
-CFLAGS=-c -g -rdynamic -funwind-tables -Wall -I./
+# CFLAGS=-c -g -rdynamic -funwind-tables -Wall -I./
+CFLAGS=-c -g -rdynamic -funwind-tables -I./
 LDFLAGS=   -lpthread -lrt
 
 STRIP=$(CROSS_COMPILE)strip
 
-#SOURCES= main.cpp 
+SOURCES= main.cpp 
 
 OBJECTS=$(SOURCES:.cpp=.o)
 
-#TARGET=exe_app
+TARGET=exe_app
 
 all: $(SOURCES) $(TARGET)
 
