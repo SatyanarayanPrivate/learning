@@ -2,12 +2,12 @@ CROSS_COMPILE=
 
 CC=$(CROSS_COMPILE)g++
 # CFLAGS=-c -g -rdynamic -funwind-tables -Wall -I./
-CFLAGS=-c -g -rdynamic -funwind-tables -I./
+CFLAGS=-c -std=c++11 -g -rdynamic -funwind-tables -I./
 LDFLAGS=   -lpthread -lrt
 
 STRIP=$(CROSS_COMPILE)strip
 
-SOURCES= main.cpp 
+# SOURCES= 04_casting.cpp
 
 OBJECTS=$(SOURCES:.cpp=.o)
 
