@@ -45,11 +45,29 @@ public:
     int Peek(){ return arr[top]; }
 
 };
-void main1()
+template<>
+class Stack<double> :public StackBase
+{
+
+    int arr[5];
+public:
+    Stack()
+    {
+        cout << "Stack generated for (Special for double)" << endl;
+    }
+    void Push(int val){ arr[++top] = val; }
+    int Pop(){ return arr[top--]; }
+    int Peek(){ return arr[top]; }
+
+};
+int main1()
 {
     Stack<int> stk1;
     Stack<double> stk2;
     Stack<char*> stk3;
+    Stack<char> stk4;
+    
+    return 0;
 }
 
 template<typename T1, typename T2>
@@ -76,5 +94,7 @@ int main()
     MyDictionary<int, char*> dictionary1;
     dictionary1.Iterate();
     Dictionary<double> dictionary;
+    Stack<char> stk4;
+    
     return 0;
 }

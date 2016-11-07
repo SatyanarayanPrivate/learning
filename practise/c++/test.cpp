@@ -1,15 +1,18 @@
 #include<iostream>
+#include <typeinfo>
 using namespace std;
 
-namespace {
-    int i= 200;
+class CA
+{
+public:
+void fun()
+{
+cout<<"fun"<<endl;
 }
-namespace {
-    int i= 200;     //redefination error
-    int j= 200;
-}
-
-int main() {
-    cout<<i<<endl;
-    return 0;
+};
+int main()
+{
+CA obj;
+cout << typeid(obj).name() << endl;
+return 0;
 }
