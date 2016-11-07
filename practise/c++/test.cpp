@@ -1,27 +1,15 @@
 #include<iostream>
 using namespace std;
 
-class CA
-{
-public:
-    CA() {
-        fun();
-    }
-    ~CA() {
-        fun();
-    }
-    virtual void fun() {
-        cout<<"fun ca"<<endl;
-    }
-};
-class CB:public CA {
-public:
-    void fun() {
-    cout<<"fun cb"<<endl;
-    }
-};
+namespace {
+    int i= 200;
+}
+namespace {
+    int i= 200;     //redefination error
+    int j= 200;
+}
+
 int main() {
-    CB obj;
-    obj.fun();
+    cout<<i<<endl;
     return 0;
 }
