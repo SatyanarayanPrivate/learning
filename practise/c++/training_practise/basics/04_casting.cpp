@@ -1,7 +1,7 @@
 #include<iostream>
 using namespace std;
 
-#if 0
+namespace ExplicitConcept01 {
 class CA {
     int x;
     int y;
@@ -34,6 +34,21 @@ public:
     }
 };
 
+class CB {
+    int x;
+    int y;
+public:
+    CB (int val): x(val), y(val)
+    {
+        cout << "CB One parameter Ctor" << endl;
+    }
+    void Display() {
+        cout << "x=" << x << endl;
+        cout << "y=" << y << endl;
+        cout << "-------------------------------------------" << endl << endl;
+    }
+};
+
 int main()
 {
     //default Ctor
@@ -45,9 +60,14 @@ int main()
     CA obj2(300);
     //CA obj2 = 200; // casting
     obj2.Display();
-    //obj2 = 300;	// casting
+    //obj2 = 300;   // casting
     //obj2.Display();
-
+    
+    CB obj2_1(300);
+    obj2_1.Display();
+    obj2_1 = 200; // dont need casting
+    obj2_1.Display();
+    
     // multi param ctor
     CA obj3(120, 212);
     //CA obj3 = {120, 458}; // C++ comma operator plays role/ won't work with explicit
@@ -59,9 +79,9 @@ int main()
     
     return 0;
 }
-#endif
+}
 
-#if 0
+namespace ExplicitConcept02 {
 class CA
 {
     int x;
@@ -109,9 +129,9 @@ int  main()
     
     return 0;
 }
-#endif
+}
 
-#if 0 
+
 class Rect;
 class Polar
 {
@@ -155,6 +175,5 @@ int main()
     
     return 0;
 }
-#endif
 
-#if 1 
+
