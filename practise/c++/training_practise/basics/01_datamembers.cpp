@@ -1,6 +1,9 @@
 #include <iostream>
 using namespace std;
 
+// interface:: class includes only pure functions
+// abstract class:: pure function with other methods
+
 class CA {
 public:
     int iInstance;
