@@ -11,8 +11,22 @@ using namespace std;
 namespace CtorSynthesisDefault01 {
 class CA {
 public:
-    CA () { cout << "CA ctor" << endl; }
-    ~CA () { cout << "CA Dtor" << endl; }
+    CA () { 
+        /*
+         prolog...
+         setVptr(CA::vftable)
+        */
+        
+        cout << "CA ctor" << endl;         
+    }
+    ~CA () { 
+        /*
+         prolog...
+         setVptr(CA::vftable)
+        */
+        
+        cout << "CA Dtor" << endl;         
+    }
 };
 class CB: public CA {
     /*
@@ -173,6 +187,65 @@ int main (void) {
     //SA o3 = 123; //<-- error
     SA o5(o2);    //copy constructor
     //SA o6 = o2; //<-- error
+    return 0;
+}
+}
+
+namespace CtorPrologAndEpilog {
+class CA
+{
+public:
+    CA()
+    {
+        /*
+         *	prolog...
+         *	setVptr(CA::vftable)
+         */
+        fun();//this->vptr->vtable[0]()()
+    }
+    virtual void fun()
+    {
+        cout << "Apple" << endl;
+    }
+    ~CA()
+    {
+        /*
+         *	prolog...
+         *	setVptr(CA::vftable)
+         */
+        fun();//this->vptr->vtable[0]()
+    }
+};
+class CB :public CA
+{
+public:
+    CB()
+    {
+        /*
+         *              prolog...
+         *              call CA::CA()
+         *              setVptr(CB::vftable)
+         */
+    }
+    virtual void fun() override//c++11
+    {
+        cout << "Orange" << endl;
+    }
+    ~CB()
+    {
+        /*
+         *	prolog...
+         *	setVptr(CB::vftable)
+         */
+    }
+    /*
+     * call CA::~CA()
+     */
+};
+
+int main()
+{
+    CB obj;
     return 0;
 }
 }

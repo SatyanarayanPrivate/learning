@@ -85,3 +85,93 @@ int main (void) {
     return 0;
 }
 }
+
+namespace DtorOrder {
+class CA {
+    static int count;
+    int x;
+public:
+    int val;
+    CA()
+    {
+        count++;
+        x = count;
+        val  = 0x00;
+        cout << "CA default ctor" << endl;
+    }
+    CA (int val): val (val) {
+        count++;
+        x = count;
+        cout << "CA one param ctor" << endl;
+    }
+    CA(const CA &ref) {
+        x = 111;
+        cout << "CA Ctor Copy" << endl;
+    }
+
+    ~CA() {
+        cout << "Dtor x= " << x << " val= "<< val << endl;
+    }
+};
+int CA:: count = 0x00;
+// order of global ctor/ dtor is order of declairation.
+static CA obj2(12);
+CA obj1(11);
+
+void fun2()
+{
+    static CA obj3(13);
+    CA obj4;
+    cout << "orange" << endl;
+}
+
+int main()
+{
+    fun2();
+    CA *obj5 = new CA();
+
+    delete obj5;
+    cout << "Apple" << endl;
+    return 0;
+}
+// 1st fun static obj's dtor gets called then global obj's
+}
+
+namespace DtorVitualTableUpdate{
+class CA
+{
+public:
+    CA() {
+        /* set vptr to CA's vptr*/
+        fun();//this->vptr->vtable[0]()
+    }
+    ~CA() {
+        /* set vptr to CA's vptr*/
+        fun();//this->vptr->vtable[0]()
+    }
+    virtual void fun() {
+        cout<<"fun ca"<<endl;
+    }
+};
+class CB:public CA {
+public:
+    /* CB()
+    { CA::CA()
+         set vptr to CB's vptr
+    }
+    */
+    void fun() {
+        cout<<"fun cb"<<endl;
+    }
+    ~CB() {
+        /* set vptr to CB's vptr*/
+        fun();//this->vptr->vtable[0]()
+    }
+
+};
+int main() {
+    CB obj;
+    obj.fun();
+    return 0;
+}
+}
