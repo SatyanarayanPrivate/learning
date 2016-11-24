@@ -1,0 +1,2 @@
+target2: main1.c
+	gcc -c main2.c
