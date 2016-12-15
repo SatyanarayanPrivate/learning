@@ -4,7 +4,9 @@ using namespace std;
 // Compiler Sythesis default Ctor
 - When base class Ctor and derived class dont have Ctor.
 - When contained has Ctor and container dont have Ctor.
-- When class has virtual method, so set vptr.
+- When base or derived  has virtual method, so set vptr.
+    - if base class has virtual method then derived and base class Ctor synthesed
+    - if derived class has virtual method then only derived class Ctor synthesed and if base class dont have virtual method.
 - when class has virtual inheritance.
 */
 
