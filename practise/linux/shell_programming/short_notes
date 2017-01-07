@@ -1,0 +1,237 @@
+• Starting a Script With #!
+    - It is called a shebang or a "bang" line.
+    - It is nothing but the absolute path to the Bash interpreter.
+    - The #! syntax used in scripts to indicate an interpreter for execution under UNIX / Linux operating systems.
+        - #!/bin/bash
+        - #!/usr/bin/python
+    - If you do not specify an interpreter line, the default is usually the /bin/sh. But, it is recommended that you set #!/bin/bash line.
+----------------------------------------------------------------------------------------------------------------------------------------------------------------
+• Find available shells in system
+    - $ cat /etc/shells
+----------------------------------------------------------------------------------------------------------------------------------------------------------------
+• Command Line Interface (CLI):: To find out your current shell type following command
+    - $ echo $SHELL
+----------------------------------------------------------------------------------------------------------------------------------------------------------------
+• Basic Command Line Editing
+    - You can use the following key combinations to edit and recall commands:
+        - CTRL + L : Clear the screen.
+        - CTRL + W : Delete the word starting at cursor.
+        - CTRL + U : Clear the line i.e. Delete the all words from command line.
+        - Up and Down arrow keys : Recall commands (see command history).
+        - Tab : Auto-complete files, directory, command names and much more.
+        - CTRL + R : Search through previously used commands (see command history)
+        - CTRL + C : Cancel currently running commands.
+        - CTRL + T : Swap the last two characters before the cursor.
+        - ESC + T : Swap the last two words before the cursor.    
+----------------------------------------------------------------------------------------------------------------------------------------------------------------
+• Getting Help In Linux
+    - man date
+    - info ls
+    - date --help
+----------------------------------------------------------------------------------------------------------------------------------------------------------------
+• type command
+    - $ type -a ls
+        - Find out if ls is built in or an external command
+----------------------------------------------------------------------------------------------------------------------------------------------------------------
+• List of command bash keywords and built in commands
+    - JOB_SPEC &
+        - will run JOB_SPEC in background
+    - (( expression ))
+    - . filename
+    - [[:]]
+    - [ arg... ]
+    - expression
+    - alias
+    - bg
+    - bind
+    - builtin
+    - caller
+    - case
+    - command
+    - compgen
+    - complete
+    - continue
+    - declare
+    - dirs
+    - disown
+    - echo
+    - enable
+    - eval
+    - exec
+    - exit
+    - export
+    - false
+    - fc
+    - fg
+    - for
+    - getopts
+    - hash
+    - help
+    - history
+    - if
+    - jobs
+    - kill
+    - let
+    - local
+    - logout
+    - popd
+    - printf
+    - pushd
+    - pwd
+    - read
+    - readonly
+    - return
+    - select
+    - set
+    - shift
+    - shopt
+    - source
+    - suspend
+    - test
+    - time
+    - times
+    - trap
+    - true
+    - type
+    - typeset
+    - ulimit
+    - umask
+    - unalias
+    - unset
+    - until
+    - variables
+    - while
+----------------------------------------------------------------------------------------------------------------------------------------------------------------
+• Find out available binary packages shell list
+    - $ apt-cache search shell
+----------------------------------------------------------------------------------------------------------------------------------------------------------------
+• Multiple Line Comment
+    - 
+        #!/bin/bash
+        echo "Adding new users to LDAP Server..."
+        <<COMMENT1
+            Master LDAP server : dir1.nixcraft.net.in
+            Add user to master and it will get sync to backup server too
+            Profile and active directory hooks are below
+        COMMENT1
+        echo "Searching for user..."
+----------------------------------------------------------------------------------------------------------------------------------------------------------------
+• Debug a script
+    - $ bash -x script_name
+    - You can also modify shebang line to run an entire script in debugging mode:
+        #!/bin/bash -x 
+    - Use of set builtin command:: Bash shell offers debugging options which can be turn on or off using set command.
+        - set -x : Display commands and their arguments as they are executed.
+        - set -v : Display shell input lines as they are read.
+        - set -n : Read commands but do not execute them. This may be used to check a shell script for syntax errors.            
+----------------------------------------------------------------------------------------------------------------------------------------------------------------
+• Variables in shell
+    - system variables
+        - list current system variables
+            $ env
+    - commanly used shell variables
+        - Display The Value Of a Variable
+            - using echo
+                $ echo "$Var_Name"
+                $ echo $Var_Name
+                $ echo "${Var_Name} other_string"
+            - using printf
+                $ printf "$VARIABLE_NAME\n"
+                $ printf "String %s" ${VARIABLE_NAME}
+                $ printf "The path is set to %s\n" $PATH
+                $ printf "%w.pL\n" $varName
+                    - w - Minimum field width.
+                    - p - Display number of digits after the decimal point (precision).
+                    - L - a conversion character. It can be:
+                        - s - String
+                        - d - Integer
+                        - e - Exponential
+                        - f - Floating point
+    - Assign values to shell variables
+        $ VarName=someValue
+            - someValue is assigned to given varName and someValue must be on right side of = (equal) sign. If someValue is not given, the variable is assigned the null string.
+            - space is not allowed in between = & someValue and also in between VarName and =.
+        - only for string
+            $ echo ${varName=new string}
+                - unset $VarName and set name to "new string".
+            $ echo ${varName-new string}
+                - if $VarName name is not set then use default "new string".
+        - The := syntax
+            - If the variable is an empty, you can assign a default value. The syntax is:
+                - ${var:=defaultValue}
+            - this is applicable for all expression like int and float too.
+----------------------------------------------------------------------------------------------------------------------------------------------------------------
+• Quoting
+    - echo "Path is $PATH" ## $PATH will be expanded
+    - echo 'I want to print $PATH' ## PATH will not be expanded
+----------------------------------------------------------------------------------------------------------------------------------------------------------------
+• export statement
+    - Use export command to export variables and functions to child processes. 
+    - If no variable names or function names are given, or if the -p option is given, a list of all names that are exported in this shell is printed.
+        $ export -p
+    - An argument of -n says to remove the export property from subsequent NAMEs.
+    - The export builtin automatically exports to the environment of child processes.
+        - Follow below steps on command line
+        $ varName="bash1varName"
+        $ echo "${varName}" # will get output
+        $ bash  #  create's child bash process
+        $ echo "${varName}" # you wont get any output
+        $ export varName1="bash1varName1"
+        $ echo "${varName1}" # will get output
+        $ bash 
+        $ $ echo "${varName1}" # will get output
+----------------------------------------------------------------------------------------------------------------------------------------------------------------
+• Unset shell and environment variables
+    $ VarName=Bus
+    $ echo $VarName
+    $ unset VarName
+    $ echo $VarName
+----------------------------------------------------------------------------------------------------------------------------------------------------------------
+• User Input Via Keyboard
+    - Multiple Input
+        $ read -p "Enter argument:: " varName1 varName2 varNameN
+            - # 1st two arguments are assigned to varName1 and varName2, then remaining will be assigned to varNameN.
+            - # for last argument $IFS comes in picture, if input arguments are more than three.
+    - Timeout Input
+        $ read -t 3 -p "Enter argument:: " varName1 varName2 varNameN
+            - timeout after 3 secs
+    - Handling Passwords
+        - The -s option causes input coming from a terminal do not be displayed on the screen.
+        $ read -s -p "Enter Passwords:: " varName
+    - $IFS and read command together
+        $ VarCombined="string1 string2 string3 string4"
+        $ read -r varName1 varName2 varName3 <<< "$VarCombined"
+        $ echo "varName1:: ${varName1}"
+        $ echo "varName2:: ${varName2}"
+        $ echo "varName3:: ${varName3}"
+    - change the IFS separator value
+        $ VarCombined="gitevivek:x:1002:1002::/home/gitevivek:/bin/sh"
+        $ old="$IFS" # Save the Internal Field Separator to a variable called old
+        $ IFS=: # Set the Internal Field Separator to a colon (i.e. change the Internal Field Separator)
+        $ read -r varName1 varName2 varName3 <<< "$VarCombined" # Read $VarCombined and generate tokens using $IFS and store them into respective fields
+        $ IFS="$old" # Finally, restore the Internal Field Separator value using $old
+----------------------------------------------------------------------------------------------------------------------------------------------------------------
+• arithmetic operations
+    - You can perform math operations on Bash shell variables. 
+    - The bash shell has built-in arithmetic option. 
+    - You can also use external command such as expr and bc calculator.
+    $ ((expression))
+        $((n1+n2))
+        $((n1*n2))
+----------------------------------------------------------------------------------------------------------------------------------------------------------------
+• integer variable
+    $  delare -i varName=0
+    $  varName=string_sample
+    $  echo "$varName"  # value will give 0
+    $  varName=1.2 # gives error
+----------------------------------------------------------------------------------------------------------------------------------------------------------------
+• constants variable
+    $ readonly varConstName="varConstStr"
+    $ declare -r varConstName="varConstStr"
+    $ unset varConstName # cannnot unset (delete) the readonly variable
+----------------------------------------------------------------------------------------------------------------------------------------------------------------
+• Bash variable existence check
+    $ VerifyVar=${varName:?Error varName not defined}
+    $ Verify=${varName1:?"Error varName1 not defined"}
+----------------------------------------------------------------------------------------------------------------------------------------------------------------
+• 
