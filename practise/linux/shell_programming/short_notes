@@ -186,6 +186,8 @@
     $ echo $VarName
     $ unset VarName
     $ echo $VarName
+    $ export PS1='\[\e[1;32m\]\u@\h:\W\$\[\e[0m\] '
+        - changes color.
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------
 • User Input Via Keyboard
     - Multiple Input
@@ -224,6 +226,7 @@
     $  varName=string_sample
     $  echo "$varName"  # value will give 0
     $  varName=1.2 # gives error
+    $  delare -ir varName=0 # readonly interger variable
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------
 • constants variable
     $ readonly varConstName="varConstStr"
@@ -234,4 +237,66 @@
     $ VerifyVar=${varName:?Error varName not defined}
     $ Verify=${varName1:?"Error varName1 not defined"}
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------
-• 
+• Path name expansion
+    - Curly braces
+        $ echo text1{ pattern1, pattern2, patternN }
+            o/p: text1{ pattern1, pattern2, patternN }
+        $ echo text2{pattern1, pattern2, patternN}
+            o/p: text2{pattern1, pattern2, patternN}
+        $ echo text3{pattern1,pattern2,patternN}
+            o/p: text3pattern1 text3pattern2 text3patternN
+        $ echo file1{1,2,3}.txt
+            o/p: file11.txt file12.txt file13.txt
+        $ echo file1{1..5}.txt
+            o/p: file21.txt file22.txt file23.txt file24.txt file25.txt
+        $ ls /etc/{resolv.conf,hosts,passwd} # this will replace $ ls -l /etc/hosts  /etc/passwd  /etc/resolv.conf
+            o/p: /etc/hosts  /etc/passwd  /etc/resolv.conf
+        $ rm -v hello.{sh,py,pl,c}
+        $ D=/webroot; mkdir -p $D/{dev,etc,bin,sbin,var,tmp}
+            o/p: will create directories /webroot/dev ... /webroot/tmp
+    - Wildcards
+        - * - Matches any string, including the null string
+            $ ls /etc/*.conf
+            $ ls *.h
+            $ ls *.{c,h}
+            - To list all file configuration file start with either letter a or b
+                $ ls /etc/[ab]*.conf 
+                $ $ ls /etc/[a-d]*.conf # display if file start with letter a to d
+        - ? - Matches any single (one) character.
+        - [...] - Matches any one of the enclosed characters.
+----------------------------------------------------------------------------------------------------------------------------------------------------------------
+• Create and use aliases
+    - An alias is nothing but shortcut to commands.
+    - Use alias command to display list of all defined aliases.
+    - Add user defined aliases to ~/.bashrc file.
+        $ alias name1='command'
+        $ alias name2='command arg1 arg2'
+    - remove the alias
+        $ unalias name1
+        $ unalias name2
+        $ unalias -a
+            - -a option is given, then remove all alias definitions
+    - permanently add aliases to my session
+        - If you want to add aliases for every user, place them either in /etc/bashrc or /etc/profile.d/useralias.sh file. Please note that you need to create /etc/profile.d/useralias.sh file.
+        - User specific alias must be placed in ~/.bashrc ($HOME/.bashrc) file.
+    - ignore an alias
+        $ alias name1='command'
+        $ name1 # will execute updated command
+        $ \name1 or "name1" # will execute old command
+        $ alias ls='ls -l'
+        $ ls # will execute updated command
+        $ \ls or "ls" # will execute old command
+----------------------------------------------------------------------------------------------------------------------------------------------------------------
+• Startup scripts
+    - Script Execution Order
+        1> /etc/profile - It contains Linux system wide environment and startup programs. This file runs first when a user logs in to the system. This file also act as a system-wide profile file for the bash shell.
+        2> /etc/profile.d - /etc/profile calls /etc/profile.d/. It is a directory and all scripts in this directory called by /etc/profile using a for loop. This file runs second when a user logs in.
+        3> ~/.bash_profile or $HOME/.bash_profile - Finally, the file ~/.bash_profile is called in the users home directory ($HOME). This file runs third when a user logs in. This file calls ~/.bashrc in the users home directory.
+----------------------------------------------------------------------------------------------------------------------------------------------------------------
+• Setting shell options
+    - List currently configured shell options
+        $ set -o
+    - set and unset shell variable options
+        $ set -o variableName
+        $ set +o variableName
+    
