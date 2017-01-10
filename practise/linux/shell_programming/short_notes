@@ -299,4 +299,44 @@
     - set and unset shell variable options
         $ set -o variableName
         $ set +o variableName
-    
+----------------------------------------------------------------------------------------------------------------------------------------------------------------
+• Conditions
+    - if condition
+        ex: 
+            if test condition
+            then
+                    command 1
+                    ...
+                    command N
+            fi
+            ----- OR -----
+            if [ condition ]
+            then
+                    command 1
+                    ...
+                    command N
+            fi
+    - if then else condition
+            if test condition
+            then
+                    command 1
+            else
+                    command 1
+            fi
+            ----- OR -----
+            if [ condition ]
+            then
+                    command 1
+            else
+                    command 1
+            fi
+    - multilevel if then else condition
+            if [ condition ]
+            then
+                    command 1
+            elif [ condition ]
+            then
+                    command 1
+            fi
+----------------------------------------------------------------------------------------------------------------------------------------------------------------
+• 
