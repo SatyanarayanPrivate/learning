@@ -339,4 +339,19 @@
                     command 1
             fi
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------
-• 
+• Exit status
+    - following command will give exit status of previoud command.
+        $ $?
+----------------------------------------------------------------------------------------------------------------------------------------------------------------
+• Conditional execution
+    - Logical AND (&&):: run second command only if first command is successful.
+        $ rm /tmp/satya && echo "file removed"
+            - if file removed then echo will print.
+    - Logical OR (||):: run second command only if first command is not successful.
+        $ rm /tmp/satya || touch /tmp/satya
+            - if file not present then file will be created.
+        $ test $(id -u) -eq 0 && echo "you are root" || echo "you are Not root"
+        $ [ $(id -u) -eq 0 ] && echo "you are root" || echo "you are Not root"
+    - Logical not (!):: used to test whether expression is true or not. For example, if file not exists.
+        $ [ ! -f /etc/resolv.conf ] && echo "file not found"
+        $ [ ! -d /etc/resolv ] && echo "dir not found"
