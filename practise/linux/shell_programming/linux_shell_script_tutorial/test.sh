@@ -1,6 +1,8 @@
 #!/bin/bash
-
-if [ file exist /etc/resolv.conf ]
-then
-    echo ""
-fi
+read -p "enter string:: " readdata
+opt=$( tr '[:upper:]' '[:lower:]' <<<"$readdata" )
+echo "${opt}"
+echo ""
+opt=$( tr '[:lower:]' '[:upper:]' <<<"$readdata" )
+echo "${opt}"
+echo ""

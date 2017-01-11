@@ -429,4 +429,54 @@
         $ exit N
             - If N is set to 0 means normal shell exit.
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------
-• 
+• Case statement
+    ex::
+        case $VARIABLE_NAME in 
+            pattern1)
+                command 1
+                command N
+                ;;
+            pattern2|pattern3)
+                command 1
+                command N
+                ;;
+            *)
+                ;;
+        esac
+        - the $VARIABLE_NAME is compared against the patterns until a match is found.
+        - *) acts as default and it is executed if no match is found.
+        - pattern can include Wildcards.
+        - You must include ;; at the end of each commandN. The shell executes all the statements up to the two semicolons that are next to each other.
+        - The esac is always required to indicate end of case statement.
+----------------------------------------------------------------------------------------------------------------------------------------------------------------
+• Dealing with case sensitive pattern
+    1 Convert pattern to lowercase/ uppercase
+        $ opt=$( tr '[:upper:]' '[:lower:]' <<<$VarName )   # convert uppercase to lowercase of VarName string.
+        $ opt=$( tr '[:lower:]' '[:upper:]' <<<$VarName )   # convert lowercase to uppercase of VarName string.
+    2 Use regex with case patterns
+        [Tt][Aa][Rr] matches "tar", "TAR", "taR", "TaR", etc 
+        [Ss][Qq][Ll] matches "sql", "SQL", "SQl", "SqL", etc
+    3 Turn on nocasematch
+        shopt -s nocasematch    # Turn on a case-insensitive matching (-s set nocasematch)
+        case $VarName in 
+        ...
+        esac
+        shopt -u nocasematch    # Turn off a case-insensitive matching (-u unset nocasematch)
+----------------------------------------------------------------------------------------------------------------------------------------------------------------
+• Bash Loops
+    - for loop syntax
+        for var in item1 item2 ... itemN
+        do
+            command1
+            ...
+            commandN
+        done
+        - The for loop three-expression syntax ( this type of for loop share a common heritage with the C programming language ):
+            for (( EXP1; EXP2; EXP3 ))
+            do
+                command1
+                command2
+                command3
+            done
+            - The above syntax is characterized by a three-parameter loop control expression; consisting of an initializer (EXP1), a loop-test or condition (EXP2), and a counting expression (EXP3).
+    - while loop syntax
