@@ -355,3 +355,50 @@
     - Logical not (!):: used to test whether expression is true or not. For example, if file not exists.
         $ [ ! -f /etc/resolv.conf ] && echo "file not found"
         $ [ ! -d /etc/resolv ] && echo "dir not found"
+----------------------------------------------------------------------------------------------------------------------------------------------------------------
+• Comparision
+    - Numeric
+        - eq:: INTEGER1 -eq INTEGER2 - INTEGER1 is equal to INTEGER2
+        - ge:: INTEGER1 -ge INTEGER2 - INTEGER1 is greater than or equal to INTEGER2
+        - gt:: INTEGER1 -gt INTEGER2 - INTEGER1 is greater than INTEGER2
+        - le:: INTEGER1 -le INTEGER2 - INTEGER1 is less than or equal to INTEGER2
+        - lt:: INTEGER1 -lt INTEGER2 - INTEGER1 is less than INTEGER2        
+        - ne:: INTEGER1 -ne INTEGER2 - INTEGER1 is not equal to INTEGER2 
+    - String 
+        - strings are equal
+            if [ "$Str1" = "$Str2" ] 
+            then 
+                echo "string are equal" 
+            fi
+        - strings are not equal
+            if [ "$Str1" != "$Str2" ] 
+            then 
+                echo "string are not equal" 
+            fi
+        - length of STRING is zero
+            if [ -z $Str1 ] 
+            then 
+                echo "string length is zero" 
+            fi
+    - File attributes comparisons
+        - [ -a fileName ] :: true if file exists.
+        - [ -e fileName ] :: true if file exists.
+        - [ -b fileName ] :: True if file exists and is a block special file.
+        - [ -c fileName ] :: True if file exists and is a character special file.
+        - [ -d dirName ] :: True if file exists and is a directory.
+        - [ -f fileName ] :: True if file exists and is a regular file.
+        - [ -g fileName ] :: True if file exists and is set-group-id.
+        - [ -h fileName ] :: True if file exists and is a symbolic link.
+        - [ -k fileName ] :: True if file exists and its ‘‘sticky’’ bit is set.
+        - [ -p fileName ] :: True if file exists and is a named pipe (FIFO).
+        - [ -r fileName ] :: True if file exists and is readable.
+        - [ -s fileName ] :: True if file exists and has a size greater than zero.
+        - [ -t fd ] :: True if file descriptor fd is open and refers to a terminal.
+        - [ -u fileName ] ::  True if file exists and its set-user-id bit is set.
+        - [ -w fileName ] ::  True if file exists and is writable.
+        - [ -x fileName ] ::  True if file exists and is executable.
+        - [ -O fileName ] ::  True if file exists and is owned by the effective user id.
+        - [ -G fileName ] ::  True if file exists and is owned by the effective group id.
+        - [ -L fileName ] ::  True if file exists and is a symbolic link.
+        - [ -S fileName ] ::  True if file exists and is a socket.
+        - [ -N fileName ] ::  True if file exists and has been modified since it was last read.            
